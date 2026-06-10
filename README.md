@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧩 CodeKids
 
-## Getting Started
+Plataforma web para que niños de 8 años en adelante aprendan a escribir **HTML y CSS de verdad**, a través de aventuras narrativas con personajes, un editor de código real (sin autocompletado ni IA) y preview en tiempo real.
 
-First, run the development server:
+MVP **100% en el navegador**: sin cuenta, sin backend y sin base de datos. Todo el progreso se guarda en `localStorage` y puede **exportarse/importarse** como archivo JSON para continuar en otra computadora.
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4**
+- **CodeMirror 6** (`@uiw/react-codemirror`) — editor sin autocompletado ni cierre automático de etiquetas (requisito pedagógico)
+- **Zustand** con persistencia en `localStorage`
+- **motion** para animaciones
+
+## Cómo correrlo en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# abre http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Otros comandos
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # build de producción
+npm run lint    # ESLint
+npm test        # prueba headless del motor de validación (jsdom)
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Cómo probar el MVP
 
-## Learn More
+1. **Landing** (`/`): página para padres/docentes con FAQ. Pulsa **Empezar gratis**.
+2. **Aventuras** (`/aventuras`): mapa con el Nivel 1 (10 aventuras de HTML). Las aventuras se desbloquean en orden.
+   - Cada aventura tiene 5 pasos: narrativa → demo visual → código de referencia → **tú escribes** (editor + preview en vivo + botón _Comprobar_) → celebración con insignia.
+3. **Proyectos** (`/proyectos`): sandbox libre con plantillas; crea, edita (autoguardado) y borra páginas propias.
+4. **Perfil** (`/perfil`): nombre, avatar, insignias y **Exportar / Importar** tus datos.
+5. **Progreso** (`/progreso`): panel para adultos con el avance por nivel.
 
-To learn more about Next.js, take a look at the following resources:
+### Probar exportar/importar entre computadoras
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+En **Perfil** → _Exportar mis datos_ descarga un `.json`. En otra computadora (u otro navegador), _Importar datos_ y selecciona ese archivo para continuar donde quedaste.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Arquitectura
 
-## Deploy on Vercel
+```
+src/
+  app/                  # rutas (App Router)
+    page.tsx            # landing
+    aventuras/          # mapa + runner de lección [id]
+    proyectos/          # galería + editor [id]
+    perfil/  progreso/
+  components/
+    editor/             # CodeEditor (CodeMirror), Preview (iframe), SplitEditor
+    lesson/             # LessonRunner (5 pasos), ReferenceCode
+    layout/  ui/
+  lib/
+    types.ts            # contratos compartidos
+    store.ts            # estado del estudiante (Zustand + persist)
+    validation.ts       # motor de validación por OUTPUT (no por texto literal)
+    export-import.ts    # exportar/importar JSON
+    catalog.ts          # personajes, insignias, avatares
+    curriculum/         # contenido de las lecciones (level1.ts ...)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Extender el currículo
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+El currículo está diseñado para crecer sin reescritura: añade `src/lib/curriculum/levelN.ts` exportando `Lesson[]` y agrégalo en `src/lib/curriculum/index.ts`. Las reglas de validación (`ValidationRule`) ya soportan estilos computados (`computedStyle`) para las lecciones de CSS de los niveles 2 a 5.
