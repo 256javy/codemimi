@@ -20,7 +20,7 @@ const SOLUTIONS: Record<number, string> = {
   4: "<p>Línea uno<br>Línea dos</p><p>Segundo párrafo</p>",
   5: "<p>Esto es <strong>fuerte</strong> y esto va <mark>marcado</mark>.</p>",
   6: "<ul><li>uno</li><li>dos</li><li>tres</li></ul>",
-  7: '<img src="https://placekitten.com/200/200" alt="un gatito">',
+  7: '<img src="https://picsum.photos/200" alt="un gatito">',
   8: '<a href="https://wikipedia.org">ir a wikipedia</a>',
   9: "<div><h2>Mi caja</h2><p>contenido</p></div>",
   10: '<h1>Yo</h1><p>hola</p><ul><li>a</li><li>b</li></ul><img src="x.jpg" alt="foto">',

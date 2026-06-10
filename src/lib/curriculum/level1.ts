@@ -21,10 +21,12 @@ export const LEVEL_1: Lesson[] = [
       { lines: ["Cada instrucción se escribe dentro de una etiqueta.", "¡Vamos a escribir nuestra primera!"] },
     ],
     demo: {
-      beforeLabel: "Texto normal",
-      beforeHtml: "Hola mundo",
-      afterLabel: "Con una etiqueta de párrafo",
-      afterHtml: "<p>Hola mundo</p>",
+      beforeLabel: "Sin HTML: todo amontonado",
+      beforeHtml:
+        "Mi mascota Mi perro Rex es café y le encanta correr en el parque todas las mañanas.",
+      afterLabel: "Con HTML: ¡ordenado!",
+      afterHtml:
+        "<h1>Mi mascota</h1>\n<p>Mi perro Rex es café y le encanta correr en el parque todas las mañanas.</p>",
     },
     reference: {
       language: "html",
@@ -73,11 +75,10 @@ export const LEVEL_1: Lesson[] = [
       { lines: ["Y arriba del todo va <!DOCTYPE html>.", "¡Así el navegador sabe que es HTML moderno!"] },
     ],
     demo: {
-      beforeLabel: "Solo texto suelto",
-      beforeHtml: "<p>Hola</p>",
-      afterLabel: "Página con esqueleto",
-      afterHtml:
-        "<!DOCTYPE html>\n<html>\n  <head></head>\n  <body>\n    <p>Hola</p>\n  </body>\n</html>",
+      beforeLabel: "Contenido sin estructura",
+      beforeHtml: "Mi diario Hoy aprendí a programar y me divertí mucho",
+      afterLabel: "Organizado dentro del <body>",
+      afterHtml: "<h1>Mi diario</h1>\n<p>Hoy aprendí a programar y me divertí mucho.</p>",
     },
     reference: {
       language: "html",
@@ -370,7 +371,7 @@ export const LEVEL_1: Lesson[] = [
       beforeLabel: "Sin imagen",
       beforeHtml: "<p>Mira mi gatito:</p>",
       afterLabel: "Con una imagen",
-      afterHtml: '<p>Mira mi gatito:</p>\n<img src="https://placekitten.com/200/200" alt="Un gatito">',
+      afterHtml: '<p>Mira mi gatito:</p>\n<img src="https://picsum.photos/200" alt="Un gatito">',
     },
     reference: {
       language: "html",
@@ -383,7 +384,7 @@ export const LEVEL_1: Lesson[] = [
     },
     challenge: {
       instruction:
-        'Agrega una imagen con <img>. Usa src="https://placekitten.com/200/200" y un alt que la describa.',
+        'Agrega una imagen con <img>. Usa src="https://picsum.photos/200" y un alt que la describa.',
       cssEnabled: false,
       startingHtml: "<h1>Mi mascota favorita</h1>\n",
       rules: [
@@ -486,10 +487,11 @@ export const LEVEL_1: Lesson[] = [
       { lines: ["Puedes meter títulos, párrafos e imágenes dentro.", "¡Así organizas tu página en bloques!"] },
     ],
     demo: {
+      css: "div { background: #ede9fe; border: 3px solid #8b5cf6; border-radius: 16px; padding: 16px; } body { font-family: system-ui, sans-serif; }",
       beforeLabel: "Elementos sueltos",
-      beforeHtml: "<h2>Tarjeta</h2>\n<p>Un texto</p>",
-      afterLabel: "Agrupados en una caja",
-      afterHtml: "<div>\n  <h2>Tarjeta</h2>\n  <p>Un texto</p>\n</div>",
+      beforeHtml: "<h2>Tarjeta</h2>\n<p>Un texto suelto, sin caja.</p>",
+      afterLabel: "Agrupados en una caja con <div>",
+      afterHtml: "<div>\n  <h2>Tarjeta</h2>\n  <p>Este texto vive dentro de la caja.</p>\n</div>",
     },
     reference: {
       language: "html",
