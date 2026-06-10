@@ -21,12 +21,11 @@ export const LEVEL_1: Lesson[] = [
       { lines: ["Cada instrucción se escribe dentro de una etiqueta.", "¡Vamos a escribir nuestra primera!"] },
     ],
     demo: {
-      beforeLabel: "Sin HTML: todo amontonado",
-      beforeHtml:
-        "Mi mascota Mi perro Rex es café y le encanta correr en el parque todas las mañanas.",
-      afterLabel: "Con HTML: ¡ordenado!",
+      beforeLabel: "Sin etiquetas: todo en una línea",
+      beforeHtml: "Me llamo Ana. Tengo un gato. Me gusta dibujar.",
+      afterLabel: "Con párrafos <p>: ¡cada idea separada!",
       afterHtml:
-        "<h1>Mi mascota</h1>\n<p>Mi perro Rex es café y le encanta correr en el parque todas las mañanas.</p>",
+        "<p>Me llamo Ana.</p>\n<p>Tengo un gato.</p>\n<p>Me gusta dibujar.</p>",
     },
     reference: {
       language: "html",
@@ -75,10 +74,10 @@ export const LEVEL_1: Lesson[] = [
       { lines: ["Y arriba del todo va <!DOCTYPE html>.", "¡Así el navegador sabe que es HTML moderno!"] },
     ],
     demo: {
-      beforeLabel: "Contenido sin estructura",
-      beforeHtml: "Mi diario Hoy aprendí a programar y me divertí mucho",
-      afterLabel: "Organizado dentro del <body>",
-      afterHtml: "<h1>Mi diario</h1>\n<p>Hoy aprendí a programar y me divertí mucho.</p>",
+      beforeLabel: "Una página en blanco",
+      beforeHtml: "",
+      afterLabel: "Con contenido dentro del <body>",
+      afterHtml: "<p>¡Hola! Esta es mi primera página.</p>",
     },
     reference: {
       language: "html",
@@ -259,7 +258,7 @@ export const LEVEL_1: Lesson[] = [
       beforeLabel: "Texto plano",
       beforeHtml: "<p>Esto es muy importante.</p>",
       afterLabel: "Con palabras destacadas",
-      afterHtml: "<p>Esto es <strong>muy importante</strong>.</p>",
+      afterHtml: "<p>Esto es <strong>muy importante</strong> y <mark>genial</mark>.</p>",
     },
     reference: {
       language: "html",
@@ -490,7 +489,7 @@ export const LEVEL_1: Lesson[] = [
       css: "div { background: #ede9fe; border: 3px solid #8b5cf6; border-radius: 16px; padding: 16px; } body { font-family: system-ui, sans-serif; }",
       beforeLabel: "Elementos sueltos",
       beforeHtml: "<h2>Tarjeta</h2>\n<p>Un texto suelto, sin caja.</p>",
-      afterLabel: "Agrupados en una caja con <div>",
+      afterLabel: "Agrupados (le pusimos un borde para que veas la caja)",
       afterHtml: "<div>\n  <h2>Tarjeta</h2>\n  <p>Este texto vive dentro de la caja.</p>\n</div>",
     },
     reference: {

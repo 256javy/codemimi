@@ -27,5 +27,7 @@ export default function AventuraPage({
     );
   }
 
-  return <LessonRunner lesson={lesson} />;
+  // key={lesson.id} fuerza remount al cambiar de aventura, así el runner
+  // reinicia su estado (paso, editor, errores) en vez de arrastrar el anterior.
+  return <LessonRunner key={lesson.id} lesson={lesson} />;
 }

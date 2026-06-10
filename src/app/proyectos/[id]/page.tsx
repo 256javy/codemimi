@@ -11,7 +11,12 @@ export default function ProyectoEditorPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
+  // key={id} fuerza remount al cambiar de proyecto, evitando arrastrar el
+  // estado del editor anterior (y autoguardarlo en el proyecto equivocado).
+  return <ProjectEditor key={id} id={id} />;
+}
 
+function ProjectEditor({ id }: { id: string }) {
   const hydrated = useStudentStore((s) => s.hydrated);
   const project = useStudentStore((s) => s.projects.find((p) => p.id === id));
   const updateProject = useStudentStore((s) => s.updateProject);
