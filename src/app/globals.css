@@ -1,26 +1,77 @@
 @import "tailwindcss";
 
+/* Tema CodeKids — colores vivos y amigables para niños. */
+@theme {
+  --color-cielo: #38bdf8;
+  --color-cielo-claro: #e0f2fe;
+  --color-uva: #8b5cf6;
+  --color-uva-claro: #ede9fe;
+  --color-menta: #34d399;
+  --color-sol: #fbbf24;
+  --color-coral: #fb7185;
+  --color-tinta: #1e1b4b;
+  --color-crema: #fffdf7;
+
+  --font-display: var(--font-fredoka), system-ui, sans-serif;
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  --font-mono: var(--font-mono-code), ui-monospace, monospace;
+
+  --radius-blob: 1.75rem;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fffdf7;
+  --foreground: #1e1b4b;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #ede9fe 0%, transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, #e0f2fe 0%, transparent 55%),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+/* Tipografía de títulos redondeada y amigable. */
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* Animaciones suaves reutilizables. */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.animate-float { animation: float 3s ease-in-out infinite; }
+
+@keyframes pop-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-pop-in { animation: pop-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1); }
+
+/* CodeMirror: tipografía y bordes redondeados para que se vea amable. */
+.cm-editor {
+  border-radius: 1rem;
+  font-size: 16px;
+  height: 100%;
+}
+.cm-editor.cm-focused {
+  outline: 3px solid var(--color-uva);
+}
+.cm-gutters {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-pop-in { animation: none; }
+  html { scroll-behavior: auto; }
 }
