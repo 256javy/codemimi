@@ -30,7 +30,7 @@ export default function Home() {
             </ButtonLink>
           </div>
           <p className="text-sm text-tinta/50">
-            100% gratis · Sin tarjeta de crédito · Sin crear cuenta
+            Gratis para siempre · Sin fines de lucro · Sin tarjeta · Sin cuenta
           </p>
         </div>
 
@@ -125,8 +125,8 @@ export default function Home() {
             },
             {
               emoji: "🆓",
-              title: "Gratis y sin cuenta",
-              text: "No hace falta registrarse. El progreso se guarda en el propio dispositivo y se puede exportar e importar cuando quieras.",
+              title: "Gratis para siempre",
+              text: "Proyecto sin fines de lucro: gratis hoy y siempre. Sin registro, sin pagos ni anuncios. El progreso se guarda en el dispositivo y puedes exportarlo e importarlo cuando quieras.",
               ring: "ring-menta/30",
             },
           ].map((f) => (
@@ -191,7 +191,7 @@ export default function Home() {
             },
             {
               q: "¿Cuesta dinero?",
-              a: "No. CodeKids es 100% gratis y no requiere tarjeta de crédito. No hay compras ocultas ni planes de pago.",
+              a: "No, y nunca costará. CodeKids es un proyecto sin fines de lucro: gratis para siempre, sin tarjeta de crédito, sin compras ocultas, sin planes de pago ni anuncios.",
             },
             {
               q: "¿Desde qué edad es recomendable?",
@@ -241,6 +241,7 @@ export default function Home() {
         <p className="font-display text-lg font-bold text-tinta">CodeKids</p>
         <p>Aprende HTML y CSS escribiendo código de verdad. 🧑‍💻</p>
         <p>Hecho con 💜 para pequeños creadores. Sin anuncios, sin rastreo.</p>
+        <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
       </footer>
     </div>
   );
