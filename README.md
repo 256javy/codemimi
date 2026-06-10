@@ -4,6 +4,8 @@ Plataforma web para que niños de 8 años en adelante aprendan a escribir **HTML
 
 MVP **100% en el navegador**: sin cuenta, sin backend y sin base de datos. Todo el progreso se guarda en `localStorage` y puede **exportarse/importarse** como archivo JSON para continuar en otra computadora.
 
+Proyecto **sin fines de lucro, gratis para siempre**.
+
 ## Stack
 
 - **Next.js 16** (App Router) + **React 19** + **TypeScript**
@@ -37,6 +39,8 @@ npm test        # prueba headless del motor de validación (jsdom)
 4. **Perfil** (`/perfil`): nombre, avatar, insignias y **Exportar / Importar** tus datos.
 5. **Progreso** (`/progreso`): panel para adultos con el avance por nivel.
 
+> Niveles 2–5 (CSS y HTML/CSS intermedio) y Nivel 6 (**JavaScript básico**) aparecen como **"Muy pronto"** en el mapa; su contenido se desarrollará más adelante.
+
 ### Probar exportar/importar entre computadoras
 
 En **Perfil** → _Exportar mis datos_ descarga un `.json`. En otra computadora (u otro navegador), _Importar datos_ y selecciona ese archivo para continuar donde quedaste.
@@ -66,3 +70,10 @@ src/
 ### Extender el currículo
 
 El currículo está diseñado para crecer sin reescritura: añade `src/lib/curriculum/levelN.ts` exportando `Lesson[]` y agrégalo en `src/lib/curriculum/index.ts`. Las reglas de validación (`ValidationRule`) ya soportan estilos computados (`computedStyle`) para las lecciones de CSS de los niveles 2 a 5.
+
+## Para desarrolladores (Claude Code)
+
+- `AGENTS.md` (importado por `CLAUDE.md`) documenta arquitectura, comandos y las **restricciones pedagógicas no negociables** (editor sin autocompletado, validación por output, estructura de 5 pasos, progresión y coherencia del currículo).
+- Agentes de proyecto en `.claude/agents/`:
+  - **`curriculum-author`** — escribe/amplía el contenido de las aventuras.
+  - **`lesson-coherence-reviewer`** — audita el currículo en busca de incoherencias (solo lectura).
