@@ -110,7 +110,7 @@ export interface ChallengeStep {
   hints: string[];
 }
 
-export type LessonLevel = 1 | 2 | 3 | 4 | 5;
+export type LessonLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 /** Una aventura/lección completa con sus 5 pasos. */
 export interface Lesson {

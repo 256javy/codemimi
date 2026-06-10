@@ -10,6 +10,8 @@ export interface LevelMeta {
   subtitle: string;
   emoji: string;
   color: string;
+  /** Temas planificados que aún no tienen contenido (se muestran como "Muy pronto"). */
+  upcoming?: string[];
 }
 
 export const LEVELS: LevelMeta[] = [
@@ -47,6 +49,22 @@ export const LEVELS: LevelMeta[] = [
     subtitle: "Páginas que se ven bien en cualquier pantalla",
     emoji: "📱",
     color: "var(--color-sol)",
+  },
+  {
+    level: 6,
+    title: "JavaScript básico",
+    subtitle: "Haz que tus páginas cobren vida y respondan",
+    emoji: "🧠",
+    color: "#eab308",
+    upcoming: [
+      "Variables y tipos de datos",
+      "Seleccionar elementos del DOM",
+      "Eventos: clic y escritura",
+      "Condicionales y bucles",
+      "Funciones",
+      "Cambiar la página con código",
+      "Proyectos interactivos",
+    ],
   },
 ];
 

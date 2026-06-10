@@ -94,8 +94,22 @@ export default function AventurasPage() {
                   })}
                 </div>
               ) : (
-                <div className="rounded-2xl border-2 border-dashed border-uva/20 bg-white/50 p-6 text-center text-tinta/50">
-                  🚧 ¡Muy pronto! Estamos preparando estas aventuras.
+                <div className="rounded-2xl border-2 border-dashed border-uva/20 bg-white/50 p-6 text-tinta/60">
+                  <p className="text-center font-semibold">
+                    🚧 ¡Muy pronto! Estamos preparando estas aventuras.
+                  </p>
+                  {level.upcoming && level.upcoming.length > 0 && (
+                    <div className="mt-4 flex flex-wrap justify-center gap-2">
+                      {level.upcoming.map((topic) => (
+                        <span
+                          key={topic}
+                          className="inline-flex items-center gap-1.5 rounded-full bg-uva/5 px-3 py-1.5 text-sm font-medium text-tinta/60 ring-1 ring-uva/10"
+                        >
+                          🔒 {topic}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
             </section>
