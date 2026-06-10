@@ -147,7 +147,7 @@ export default function ProgresoPage() {
       <section className="rounded-2xl border-2 border-menta/30 bg-menta/5 p-5 text-sm text-tinta/70">
         <h2 className="mb-1 font-display text-base font-bold text-tinta">🔒 Sobre la privacidad</h2>
         <p>
-          CodeKids funciona 100% en este navegador: no hay cuentas ni servidores. Todo el
+          CodeMimi funciona 100% en este navegador: no hay cuentas ni servidores. Todo el
           progreso se guarda localmente en este dispositivo y solo sale de aquí si exportas el
           archivo manualmente.
         </p>

@@ -19,7 +19,7 @@ export function exportStudentData(data: StudentData): void {
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = `codekids-${safeName || "estudiante"}-${stamp}.json`;
+  a.download = `codemimi-${safeName || "estudiante"}-${stamp}.json`;
   document.body.appendChild(a);
   a.click();
   a.remove();
@@ -46,11 +46,11 @@ export function parseStudentData(raw: string): ImportResult {
   }
 
   const o = obj as Record<string, unknown>;
-  // Verificación mínima de que parece un archivo de CodeKids.
+  // Verificación mínima de que parece un archivo de CodeMimi.
   const looksValid =
     "lessons" in o || "badges" in o || "projects" in o || "username" in o;
   if (!looksValid) {
-    return { ok: false, error: "Este archivo no parece ser de CodeKids." };
+    return { ok: false, error: "Este archivo no parece ser de CodeMimi." };
   }
 
   const data: StudentData = {

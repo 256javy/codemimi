@@ -24,7 +24,7 @@ const mono = Baloo_2({
 });
 
 export const metadata: Metadata = {
-  title: "CodeKids — Aprende HTML y CSS jugando",
+  title: "CodeMimi — Aprende HTML y CSS jugando",
   description:
     "Plataforma para que niños de 8 años en adelante aprendan a escribir HTML y CSS de verdad, a través de aventuras y proyectos creativos.",
 };

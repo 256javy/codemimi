@@ -7,7 +7,7 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import type { AvatarId, BadgeId, Project, StudentData } from "./types";
 import { SCHEMA_VERSION } from "./types";
 
-const STORAGE_KEY = "codekids-student";
+const STORAGE_KEY = "codemimi-student";
 
 function todayKey(): string {
   const d = new Date();

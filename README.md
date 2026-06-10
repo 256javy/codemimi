@@ -1,4 +1,4 @@
-# 🧩 CodeKids
+# 🧩 CodeMimi
 
 Plataforma web para que niños de 8 años en adelante aprendan a escribir **HTML y CSS de verdad**, a través de aventuras narrativas con personajes, un editor de código real (sin autocompletado ni IA) y preview en tiempo real.
 

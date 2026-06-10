@@ -13,7 +13,7 @@ export default function Home() {
           <h1 className="text-5xl leading-tight sm:text-6xl">
             Tu hijo escribe{" "}
             <span className="text-uva">código de verdad</span> en{" "}
-            <span className="text-cielo">CodeKids</span>
+            <span className="text-cielo">CodeMimi</span>
           </h1>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-tinta/70 lg:mx-0">
             Aventuras narrativas donde los peques aprenden HTML y CSS escribiendo
@@ -48,7 +48,7 @@ export default function Home() {
         <div className="text-center">
           <h2 className="text-3xl sm:text-4xl">¿Cómo funciona?</h2>
           <p className="mx-auto mt-3 max-w-2xl text-lg text-tinta/70">
-            CodeKids no es un juego de arrastrar piezas. Tu hijo se sienta frente
+            CodeMimi no es un juego de arrastrar piezas. Tu hijo se sienta frente
             a un editor de código real y aprende escribiendo, igual que los
             programadores de verdad.
           </p>
@@ -150,7 +150,7 @@ export default function Home() {
           <h2 className="text-3xl sm:text-4xl">Para padres y docentes</h2>
           <p className="text-lg leading-relaxed text-tinta/80">
             Sabemos lo importante que es la privacidad de los más pequeños.
-            CodeKids está diseñado para que pueda usarse con total tranquilidad.
+            CodeMimi está diseñado para que pueda usarse con total tranquilidad.
           </p>
           <ul className="flex flex-col gap-3">
             {[
@@ -187,11 +187,11 @@ export default function Home() {
           {[
             {
               q: "¿Necesita crear una cuenta?",
-              a: "No. CodeKids funciona sin registro ni inicio de sesión. El niño puede empezar a aprender de inmediato, sin dar ningún dato.",
+              a: "No. CodeMimi funciona sin registro ni inicio de sesión. El niño puede empezar a aprender de inmediato, sin dar ningún dato.",
             },
             {
               q: "¿Cuesta dinero?",
-              a: "No, y nunca costará. CodeKids es un proyecto sin fines de lucro: gratis para siempre, sin tarjeta de crédito, sin compras ocultas, sin planes de pago ni anuncios.",
+              a: "No, y nunca costará. CodeMimi es un proyecto sin fines de lucro: gratis para siempre, sin tarjeta de crédito, sin compras ocultas, sin planes de pago ni anuncios.",
             },
             {
               q: "¿Desde qué edad es recomendable?",
@@ -238,7 +238,7 @@ export default function Home() {
 
       {/* ---------- FOOTER ---------- */}
       <footer className="flex flex-col items-center gap-3 border-t border-uva/10 pt-8 text-center text-sm text-tinta/60">
-        <p className="font-display text-lg font-bold text-tinta">CodeKids</p>
+        <p className="font-display text-lg font-bold text-tinta">CodeMimi</p>
         <p>Aprende HTML y CSS escribiendo código de verdad. 🧑‍💻</p>
         <p>Hecho con 💜 para pequeños creadores. Sin anuncios, sin rastreo.</p>
         <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
