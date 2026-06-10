@@ -14,6 +14,16 @@ export const SITE = {
   themeColor: "#7c3aed",
   /** Organización detrás del proyecto. */
   publisher: "Rekova",
+  /** Handle de X/Twitter (para twitter:site / twitter:creator). */
+  twitterHandle: "@rekovaoficial",
+  /** Perfiles oficiales — alimentan sameAs del JSON-LD. */
+  social: [
+    "https://www.instagram.com/rekovaoficial",
+    "https://www.facebook.com/rekovaoficial",
+    "https://x.com/rekovaoficial",
+    "https://www.tiktok.com/@rekovaoficial",
+    "https://www.linkedin.com/company/rekova",
+  ],
   keywords: [
     "aprender HTML para niños",
     "CSS para niños",

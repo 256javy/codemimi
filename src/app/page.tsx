@@ -260,6 +260,26 @@ export default function Home() {
         <p>Aprende HTML y CSS escribiendo código de verdad. 🧑‍💻</p>
         <p>Hecho con 💜 por Rekova para pequeños creadores. Sin anuncios, sin rastreo.</p>
         <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
+        <nav className="flex flex-wrap items-center justify-center gap-4 pt-2" aria-label="Redes sociales de Rekova">
+          {[
+            { name: "Instagram", href: "https://www.instagram.com/rekovaoficial", emoji: "📸" },
+            { name: "Facebook", href: "https://www.facebook.com/rekovaoficial", emoji: "👍" },
+            { name: "X", href: "https://x.com/rekovaoficial", emoji: "✖️" },
+            { name: "TikTok", href: "https://www.tiktok.com/@rekovaoficial", emoji: "🎵" },
+            { name: "LinkedIn", href: "https://www.linkedin.com/company/rekova", emoji: "💼" },
+          ].map((social) => (
+            <a
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-semibold text-tinta/60 transition hover:text-uva"
+            >
+              <span aria-hidden>{social.emoji}</span>
+              {social.name}
+            </a>
+          ))}
+        </nav>
       </footer>
     </div>
   );

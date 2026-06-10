@@ -52,6 +52,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE.title,
     description: SITE.description,
+    site: SITE.twitterHandle,
+    creator: SITE.twitterHandle,
   },
   robots: {
     index: true,
@@ -86,7 +88,7 @@ const jsonLd = {
       url: SITE.url,
       description: SITE.description,
       inLanguage: "es",
-      sameAs: [] as string[],
+      sameAs: [...SITE.social],
     },
     {
       "@type": "WebSite",
