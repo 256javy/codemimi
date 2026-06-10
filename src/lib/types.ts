@@ -1,4 +1,4 @@
-// Tipos compartidos de CodeKids. Este archivo es el contrato central del que
+// Tipos compartidos de CodeMimi. Este archivo es el contrato central del que
 // dependen el currículo, el store, el motor de validación y la UI.
 
 /** Reglas de validación basadas en el OUTPUT del código del niño (no en el texto

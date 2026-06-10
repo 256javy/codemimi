@@ -24,7 +24,7 @@ export default function AppHeader() {
         <Link href="/" className="flex items-center gap-2 font-display text-xl font-bold text-tinta">
           <span className="text-2xl">🧩</span>
           <span>
-            Code<span className="text-uva">Kids</span>
+            Code<span className="text-uva">Mimi</span>
           </span>
         </Link>
 
