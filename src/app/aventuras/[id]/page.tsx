@@ -1,33 +1,56 @@
-"use client";
+import type { Metadata } from "next";
+import { ALL_LESSONS, getLesson } from "@/lib/curriculum";
+import { SITE } from "@/lib/seo";
+import AventuraClient from "./AventuraClient";
 
-import { use } from "react";
-import Link from "next/link";
-import { getLesson } from "@/lib/curriculum";
-import LessonRunner from "@/components/lesson/LessonRunner";
+// Prerenderiza una ruta por cada aventura: cada una queda como página estática
+// con su propio título y descripción para los buscadores.
+export function generateStaticParams() {
+  return ALL_LESSONS.map((lesson) => ({ id: String(lesson.id) }));
+}
 
-export default function AventuraPage({
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const lesson = getLesson(Number(id));
+
+  if (!lesson) {
+    return {
+      title: "Aventura no encontrada",
+      robots: { index: false, follow: true },
+    };
+  }
+
+  const title = `Aventura ${lesson.id}: ${lesson.title}`;
+  const url = `/aventuras/${lesson.id}`;
+
+  return {
+    title,
+    description: lesson.concept,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      siteName: SITE.name,
+      title,
+      description: lesson.concept,
+      url,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: lesson.concept,
+    },
+  };
+}
+
+export default async function AventuraPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
-  // En Next.js 16 los params de página son una Promise; se desenvuelven con use().
-  const { id } = use(params);
-  const lesson = getLesson(Number(id));
-
-  if (!lesson) {
-    return (
-      <div className="space-y-4 py-16 text-center">
-        <div className="text-6xl">🚧</div>
-        <h1 className="text-2xl font-bold text-tinta">Esta aventura aún no está lista</h1>
-        <p className="text-tinta/60">¡Vuelve pronto, estamos preparándola!</p>
-        <Link href="/aventuras" className="inline-block font-semibold text-uva hover:underline">
-          ← Volver al mapa de aventuras
-        </Link>
-      </div>
-    );
-  }
-
-  // key={lesson.id} fuerza remount al cambiar de aventura, así el runner
-  // reinicia su estado (paso, editor, errores) en vez de arrastrar el anterior.
-  return <LessonRunner key={lesson.id} lesson={lesson} />;
+  const { id } = await params;
+  return <AventuraClient id={id} />;
 }

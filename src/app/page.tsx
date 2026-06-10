@@ -1,9 +1,48 @@
 import { ButtonLink } from "@/components/ui/Button";
 import Character from "@/components/ui/Character";
 
+// Preguntas frecuentes: se renderizan en la página y, en paralelo, alimentan
+// el JSON-LD FAQPage para que Google pueda mostrarlas como resultado enriquecido.
+const FAQ = [
+  {
+    q: "¿Necesita crear una cuenta?",
+    a: "No. CodeMimi funciona sin registro ni inicio de sesión. El niño puede empezar a aprender de inmediato, sin dar ningún dato.",
+  },
+  {
+    q: "¿Cuesta dinero?",
+    a: "No, y nunca costará. CodeMimi es un proyecto sin fines de lucro: gratis para siempre, sin tarjeta de crédito, sin compras ocultas, sin planes de pago ni anuncios.",
+  },
+  {
+    q: "¿Desde qué edad es recomendable?",
+    a: "Está pensado para niños desde los 8 años. La lectura y la escritura básicas son suficientes para seguir las aventuras y escribir su primer código.",
+  },
+  {
+    q: "¿Qué pasa si cambio de computadora?",
+    a: "Como el progreso se guarda en el navegador, puedes exportar los datos a un archivo desde un dispositivo e importarlo en otro. Así el niño continúa justo donde lo dejó.",
+  },
+  {
+    q: "¿Usa bloques o inteligencia artificial?",
+    a: "No. El niño escribe código real (HTML y CSS) con sus propias manos: sin arrastrar bloques, sin autocompletado y sin IA que lo haga por él.",
+  },
+];
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: FAQ.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col gap-24 py-8 sm:py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* ---------- HERO ---------- */}
       <section className="grid items-center gap-12 lg:grid-cols-2">
         <div className="flex flex-col gap-6 text-center lg:text-left">
@@ -184,28 +223,7 @@ export default function Home() {
       <section className="flex flex-col gap-8">
         <h2 className="text-center text-3xl sm:text-4xl">Preguntas frecuentes</h2>
         <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
-          {[
-            {
-              q: "¿Necesita crear una cuenta?",
-              a: "No. CodeMimi funciona sin registro ni inicio de sesión. El niño puede empezar a aprender de inmediato, sin dar ningún dato.",
-            },
-            {
-              q: "¿Cuesta dinero?",
-              a: "No, y nunca costará. CodeMimi es un proyecto sin fines de lucro: gratis para siempre, sin tarjeta de crédito, sin compras ocultas, sin planes de pago ni anuncios.",
-            },
-            {
-              q: "¿Desde qué edad es recomendable?",
-              a: "Está pensado para niños desde los 8 años. La lectura y la escritura básicas son suficientes para seguir las aventuras y escribir su primer código.",
-            },
-            {
-              q: "¿Qué pasa si cambio de computadora?",
-              a: "Como el progreso se guarda en el navegador, puedes exportar los datos a un archivo desde un dispositivo e importarlo en otro. Así el niño continúa justo donde lo dejó.",
-            },
-            {
-              q: "¿Usa bloques o inteligencia artificial?",
-              a: "No. El niño escribe código real (HTML y CSS) con sus propias manos: sin arrastrar bloques, sin autocompletado y sin IA que lo haga por él.",
-            },
-          ].map((item) => (
+          {FAQ.map((item) => (
             <details
               key={item.q}
               className="group rounded-2xl bg-white p-5 shadow-sm ring-1 ring-uva/10 open:ring-uva/30"
@@ -240,7 +258,7 @@ export default function Home() {
       <footer className="flex flex-col items-center gap-3 border-t border-uva/10 pt-8 text-center text-sm text-tinta/60">
         <p className="font-display text-lg font-bold text-tinta">CodeMimi</p>
         <p>Aprende HTML y CSS escribiendo código de verdad. 🧑‍💻</p>
-        <p>Hecho con 💜 para pequeños creadores. Sin anuncios, sin rastreo.</p>
+        <p>Hecho con 💜 por Rekova para pequeños creadores. Sin anuncios, sin rastreo.</p>
         <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
       </footer>
     </div>
