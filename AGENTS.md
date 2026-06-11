@@ -70,4 +70,4 @@ Para escribir contenido nuevo usa el agente `curriculum-author`; para auditar co
 
 ## Git
 
-Commits convencionales en español (`feat:`, `fix:`, `docs:`, `content:`...). Repo **local, sin remote**. No hacer push.
+Commits convencionales en español (`feat:`, `fix:`, `docs:`, `content:`...). Remote: `origin` → `github.com:256javy/codemimi.git`. Commitea y pushea a `main` solo cuando el usuario lo pida.
