@@ -1,6 +1,6 @@
 # 🧩 CodeMimi
 
-Plataforma web para que niños de 8 años en adelante aprendan a escribir **HTML y CSS de verdad**, a través de aventuras narrativas con personajes, un editor de código real (sin autocompletado ni IA) y preview en tiempo real.
+Plataforma web para que niños de 8 años en adelante aprendan a escribir **HTML, CSS y JavaScript de verdad**, a través de aventuras narrativas con personajes, un editor de código real (sin autocompletado ni IA) y preview en tiempo real.
 
 MVP **100% en el navegador**: sin cuenta, sin backend y sin base de datos. Todo el progreso se guarda en `localStorage` y puede **exportarse/importarse** como archivo JSON para continuar en otra computadora.
 

@@ -5,11 +5,11 @@ export const SITE = {
   name: "CodeMimi",
   /** URL canónica de producción (sin barra final). */
   url: "https://codemimi.rekova.com.py",
-  title: "CodeMimi — Aprende HTML y CSS jugando",
+  title: "CodeMimi — Aprende HTML, CSS y JavaScript jugando",
   /** Plantilla para títulos de páginas internas. */
   titleTemplate: "%s · CodeMimi",
   description:
-    "Plataforma gratuita para que niños desde los 8 años aprendan a escribir HTML y CSS de verdad, con aventuras narrativas y un editor de código con vista en vivo. Sin cuentas, sin anuncios, sin rastreo.",
+    "Plataforma gratuita para que niños desde los 8 años aprendan a escribir HTML, CSS y JavaScript de verdad, con aventuras narrativas y un editor de código con vista en vivo. Sin cuentas, sin anuncios, sin rastreo.",
   locale: "es_PY",
   themeColor: "#7c3aed",
   /** Organización detrás del proyecto. */
@@ -27,6 +27,7 @@ export const SITE = {
   keywords: [
     "aprender HTML para niños",
     "CSS para niños",
+    "JavaScript para niños",
     "programación para niños",
     "aprender a programar gratis",
     "código para niños en español",

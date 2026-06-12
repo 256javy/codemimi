@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import AventurasClient from "./AventurasClient";
 
 export const metadata: Metadata = {
-  title: "Mapa de aventuras — Aprende HTML y CSS paso a paso",
+  title: "Mapa de aventuras — Aprende HTML, CSS y JavaScript paso a paso",
   description:
-    "Recorre las aventuras de CodeMimi y aprende HTML y CSS en orden, desde tu primera etiqueta hasta tu primera página web. Gratis y sin cuenta.",
+    "Recorre las aventuras de CodeMimi y aprende HTML, CSS y JavaScript en orden, desde tu primera etiqueta hasta tu primera página web. Gratis y sin cuenta.",
   alternates: { canonical: "/aventuras" },
   openGraph: {
     title: "Mapa de aventuras · CodeMimi",
     description:
-      "Aprende HTML y CSS paso a paso con aventuras narrativas para niños desde 8 años.",
+      "Aprende HTML, CSS y JavaScript paso a paso con aventuras narrativas para niños desde 8 años.",
     url: "/aventuras",
   },
 };

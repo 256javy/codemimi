@@ -22,7 +22,7 @@ const FAQ = [
   },
   {
     q: "¿Usa bloques o inteligencia artificial?",
-    a: "No. El niño escribe código real (HTML y CSS) con sus propias manos: sin arrastrar bloques, sin autocompletado y sin IA que lo haga por él.",
+    a: "No. El niño escribe código real (HTML, CSS y JavaScript) con sus propias manos: sin arrastrar bloques, sin autocompletado y sin IA que lo haga por él.",
   },
 ];
 
@@ -55,8 +55,9 @@ export default function Home() {
             <span className="text-cielo">CodeMimi</span>
           </h1>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-tinta/70 lg:mx-0">
-            Aventuras narrativas donde los peques aprenden HTML y CSS escribiendo
-            código real, con un editor que muestra el resultado al instante. Sin
+            Aventuras narrativas donde los peques aprenden HTML, CSS y JavaScript
+            escribiendo código real, con un editor que muestra el resultado al
+            instante. Sin
             bloques que arrastrar, sin autocompletado, sin IA que lo haga por
             ellos.
           </p>
@@ -106,7 +107,7 @@ export default function Home() {
               n: "2",
               emoji: "⌨️",
               title: "Escribe código real",
-              text: "Teclea HTML y CSS de verdad. Sin autocompletado mágico ni IA: cada etiqueta y cada estilo los escribe el propio niño.",
+              text: "Teclea HTML, CSS y JavaScript de verdad. Sin autocompletado mágico ni IA: cada etiqueta, estilo y línea de código los escribe el propio niño.",
               bg: "bg-cielo-claro",
             },
             {
@@ -257,7 +258,7 @@ export default function Home() {
       {/* ---------- FOOTER ---------- */}
       <footer className="flex flex-col items-center gap-3 border-t border-uva/10 pt-8 text-center text-sm text-tinta/60">
         <p className="font-display text-lg font-bold text-tinta">CodeMimi</p>
-        <p>Aprende HTML y CSS escribiendo código de verdad. 🧑‍💻</p>
+        <p>Aprende HTML, CSS y JavaScript escribiendo código de verdad. 🧑‍💻</p>
         <p>Hecho con 💜 por Rekova para pequeños creadores. Sin anuncios, sin rastreo.</p>
         <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
         <nav className="flex flex-wrap items-center justify-center gap-4 pt-2" aria-label="Redes sociales de Rekova">

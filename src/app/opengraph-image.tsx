@@ -46,7 +46,7 @@ export default function OpengraphImage() {
             textAlign: "center",
           }}
         >
-          Aprende HTML y CSS escribiendo código de verdad
+          Aprende HTML, CSS y JavaScript escribiendo código de verdad
         </div>
         <div
           style={{
