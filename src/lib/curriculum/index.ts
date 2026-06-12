@@ -93,20 +93,19 @@ export function getNextLessonId(id: number): number | undefined {
   return ALL_LESSONS[idx + 1].id;
 }
 
-/** ¿Está desbloqueada esta aventura? Desbloqueo por-nivel: la primera de cada
- *  nivel siempre, o si la anterior del mismo nivel ya está completada. Fuente
- *  única de verdad para el mapa y la sección de repaso. */
+/** ¿Está desbloqueada esta aventura? Desbloqueo SECUENCIAL GLOBAL: solo la
+ *  primera aventura de todas está abierta de inicio; cualquier otra requiere que
+ *  la inmediatamente anterior (en orden global, atravesando niveles) esté
+ *  completada. Fuente única de verdad para el mapa, la ruta y el repaso. */
 export function isLessonUnlocked(
   lessonId: number,
   isCompleted: (id: number) => boolean,
 ): boolean {
-  const lesson = getLesson(lessonId);
-  if (!lesson) return false;
+  const idx = ALL_LESSONS.findIndex((l) => l.id === lessonId);
+  if (idx === -1) return false;
   if (isCompleted(lessonId)) return true;
-  const levelLessons = getLevelLessons(lesson.level);
-  const idx = levelLessons.findIndex((l) => l.id === lessonId);
-  if (idx <= 0) return true;
-  return isCompleted(levelLessons[idx - 1].id);
+  if (idx === 0) return true;
+  return isCompleted(ALL_LESSONS[idx - 1].id);
 }
 
 /** Todas las aventuras desbloqueadas, en orden, según el progreso dado. */
