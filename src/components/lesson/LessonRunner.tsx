@@ -26,6 +26,7 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
 
   const [html, setHtml] = useState(lesson.challenge.startingHtml);
   const [css, setCss] = useState(lesson.challenge.startingCss ?? "");
+  const [js, setJs] = useState(lesson.challenge.startingJs ?? "");
   const [errors, setErrors] = useState<string[]>([]);
   const [checking, setChecking] = useState(false);
   const [hintsShown, setHintsShown] = useState(0);
@@ -41,7 +42,7 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
   async function handleCheck() {
     setChecking(true);
     try {
-      const result = await validateOutput(html, css, lesson.challenge.rules);
+      const result = await validateOutput(html, css, lesson.challenge.rules, js);
       setErrors(result.errors);
       if (result.passed) {
         completeLesson(lesson.id, lesson.badge);
@@ -133,9 +134,13 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
           <SplitEditor
             html={html}
             css={css}
+            js={js}
             onHtmlChange={setHtml}
             onCssChange={setCss}
+            onJsChange={setJs}
             cssEnabled={lesson.challenge.cssEnabled}
+            jsEnabled={lesson.challenge.jsEnabled}
+            responsivePreview={lesson.challenge.responsivePreview}
             feedback={
               <div className="space-y-3">
                 {errors.length > 0 && (

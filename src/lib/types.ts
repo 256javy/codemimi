@@ -55,6 +55,35 @@ export type ValidationRule =
       property: string;
       /** Substring que debe contener el valor computado de la propiedad. */
       contains: string;
+      /** Ancho en px del viewport de render (para validar media queries).
+       *  Si se omite se usa el ancho por defecto (800). */
+      viewport?: number;
+      message: string;
+    }
+  | {
+      type: "jsMatches";
+      /** Expresión regular (string) evaluada sobre el JS crudo. */
+      pattern: string;
+      flags?: string;
+      message: string;
+    }
+  | {
+      type: "domAfterJs";
+      /** Si se da, se simula un clic en este elemento antes de comprobar. */
+      clickSelector?: string;
+      /** Selector que debe existir en el DOM tras ejecutar el JS del niño. */
+      selector: string;
+      /** Texto que debe contener el elemento tras ejecutar el JS (case-insensitive).
+       *  Si se omite, basta con que el elemento exista. */
+      textContains?: string;
+      /** Propiedad CSS computada a comprobar tras ejecutar el JS (con
+       *  styleContains y/o styleNotContains). */
+      styleProperty?: string;
+      /** Substring que debe contener el valor computado de styleProperty. */
+      styleContains?: string;
+      /** Substring que NO debe contener el valor computado de styleProperty
+       *  (p. ej. el valor inicial, para exigir que el JS lo haya cambiado). */
+      styleNotContains?: string;
       message: string;
     };
 
@@ -89,7 +118,7 @@ export interface CodeAnnotation {
 }
 
 export interface ReferenceStep {
-  language: "html" | "css";
+  language: "html" | "css" | "js";
   code: string;
   annotations?: CodeAnnotation[];
 }
@@ -100,10 +129,16 @@ export interface ChallengeStep {
   instruction: string;
   /** Indica si el editor de CSS está disponible en esta lección. */
   cssEnabled: boolean;
+  /** Indica si el editor de JavaScript está disponible en esta lección. */
+  jsEnabled?: boolean;
   /** Código HTML inicial precargado en el editor. */
   startingHtml: string;
   /** Código CSS inicial (si cssEnabled). */
   startingCss?: string;
+  /** Código JS inicial (si jsEnabled). */
+  startingJs?: string;
+  /** Muestra el conmutador 📱/🖥️ en la vista previa (lecciones responsive). */
+  responsivePreview?: boolean;
   /** Reglas que validan el output. Todas deben cumplirse para pasar. */
   rules: ValidationRule[];
   /** Pistas textuales progresivas (no muestran la solución). */
@@ -114,7 +149,7 @@ export type LessonLevel = 1 | 2 | 3 | 4 | 5 | 6;
 
 /** Una aventura/lección completa con sus 5 pasos. */
 export interface Lesson {
-  /** Número global de aventura (1..50). */
+  /** Número global de aventura (1..60). */
   id: number;
   level: LessonLevel;
   title: string;

@@ -6,24 +6,25 @@ import { buildDocument } from "@/lib/validation";
 interface PreviewProps {
   html: string;
   css: string;
+  js?: string;
   /** Debounce en ms para actualizar el render (PRD: 300ms). */
   debounceMs?: number;
 }
 
-/** Renderiza el HTML+CSS del niño en un iframe aislado, con debounce. */
-export default function Preview({ html, css, debounceMs = 300 }: PreviewProps) {
-  const [doc, setDoc] = useState<string>(() => buildDocument(html, css));
+/** Renderiza el HTML+CSS(+JS) del niño en un iframe aislado, con debounce. */
+export default function Preview({ html, css, js = "", debounceMs = 300 }: PreviewProps) {
+  const [doc, setDoc] = useState<string>(() => buildDocument(html, css, js));
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (timer.current) clearTimeout(timer.current);
     timer.current = setTimeout(() => {
-      setDoc(buildDocument(html, css));
+      setDoc(buildDocument(html, css, js));
     }, debounceMs);
     return () => {
       if (timer.current) clearTimeout(timer.current);
     };
-  }, [html, css, debounceMs]);
+  }, [html, css, js, debounceMs]);
 
   return (
     <iframe

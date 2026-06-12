@@ -3,13 +3,14 @@
 import CodeMirror from "@uiw/react-codemirror";
 import { html } from "@codemirror/lang-html";
 import { css } from "@codemirror/lang-css";
+import { javascript } from "@codemirror/lang-javascript";
 import { EditorView } from "@codemirror/view";
 import { useMemo } from "react";
 
 interface CodeEditorProps {
   value: string;
   onChange: (value: string) => void;
-  language: "html" | "css";
+  language: "html" | "css" | "js";
   readOnly?: boolean;
   /** Permite pegar desde fuera (true en proyectos libres, false en lecciones). */
   ariaLabel?: string;
@@ -39,7 +40,11 @@ export default function CodeEditor({
   ariaLabel,
 }: CodeEditorProps) {
   const extensions = useMemo(
-    () => [language === "html" ? html() : css(), kidTheme, EditorView.lineWrapping],
+    () => [
+      language === "html" ? html() : language === "css" ? css() : javascript(),
+      kidTheme,
+      EditorView.lineWrapping,
+    ],
     [language],
   );
 
