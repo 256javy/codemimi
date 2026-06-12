@@ -255,12 +255,36 @@ export default function Home() {
         </ButtonLink>
       </section>
 
+      {/* ---------- CONTACTO ---------- */}
+      <section className="flex flex-col items-center gap-4 rounded-blob bg-white p-10 text-center shadow-sm ring-1 ring-uva/10 sm:p-12">
+        <span className="text-4xl" aria-hidden>
+          💌
+        </span>
+        <h2 className="text-2xl sm:text-3xl">
+          Padres y docentes: ¿tienen preguntas o sugerencias?
+        </h2>
+        <p className="max-w-xl text-lg leading-relaxed text-tinta/70">
+          Si acompañas a un peque en CodeMimi y quieres contarnos algo, pedir
+          ayuda o proponer una idea, escríbenos. Te respondemos.
+        </p>
+        <a
+          href="mailto:contacto@rekova.com.py"
+          className="inline-flex items-center gap-2 rounded-full bg-uva px-6 py-3 font-semibold text-white transition hover:bg-uva/90"
+        >
+          <span aria-hidden>✉️</span>
+          contacto@rekova.com.py
+        </a>
+      </section>
+
       {/* ---------- FOOTER ---------- */}
       <footer className="flex flex-col items-center gap-3 border-t border-uva/10 pt-8 text-center text-sm text-tinta/60">
         <p className="font-display text-lg font-bold text-tinta">CodeMimi</p>
         <p>Aprende HTML, CSS y JavaScript escribiendo código de verdad. 🧑‍💻</p>
         <p>Hecho con 💜 por Rekova para pequeños creadores. Sin anuncios, sin rastreo.</p>
         <p>Proyecto sin fines de lucro · Gratis para siempre.</p>
+        <p className="pt-1 font-semibold text-tinta/70">
+          Síguenos en redes para ayudarnos a llegar a más peques 💜
+        </p>
         <nav className="flex flex-wrap items-center justify-center gap-4 pt-2" aria-label="Redes sociales de Rekova">
           {[
             { name: "Instagram", href: "https://www.instagram.com/rekovaoficial", emoji: "📸" },
