@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LEVELS, getLevelLessons } from "@/lib/curriculum";
+import { LEVELS, getLevelLessons, isLessonUnlocked } from "@/lib/curriculum";
 import { useStudentStore } from "@/lib/store";
 import ProgressBar from "@/components/ui/ProgressBar";
 import { CHARACTERS } from "@/lib/catalog";
@@ -51,12 +51,12 @@ export default function AventurasClient() {
 
               {available ? (
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-                  {levelLessons.map((lesson, idx) => {
-                    const completed = hydrated && lessons[lesson.id]?.completed;
-                    // Desbloqueada si es la primera del nivel o la anterior está hecha.
-                    const prev = levelLessons[idx - 1];
-                    const unlocked =
-                      idx === 0 || (hydrated && prev && lessons[prev.id]?.completed) || completed;
+                  {levelLessons.map((lesson) => {
+                    const completed = Boolean(hydrated && lessons[lesson.id]?.completed);
+                    const unlocked = isLessonUnlocked(
+                      lesson.id,
+                      (id) => Boolean(hydrated && lessons[id]?.completed),
+                    );
                     const char = CHARACTERS[lesson.character];
 
                     const card = (

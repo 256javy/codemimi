@@ -7,6 +7,7 @@ import { getAvatar } from "@/lib/catalog";
 
 const NAV = [
   { href: "/aventuras", label: "Aventuras", emoji: "🗺️" },
+  { href: "/repaso", label: "Repaso", emoji: "📖" },
   { href: "/proyectos", label: "Proyectos", emoji: "🎨" },
   { href: "/perfil", label: "Perfil", emoji: "⭐" },
   { href: "/progreso", label: "Progreso", emoji: "📊" },
