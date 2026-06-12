@@ -63,8 +63,8 @@ scripts/               tests con tsx (excluidos del tsconfig de la app)
 
 1. Crea `src/lib/curriculum/levelN.ts` exportando `export const LEVEL_N: Lesson[]` siguiendo la forma de `level1.ts`.
 2. Impórtalo y agrégalo a `ALL_LESSONS` en `src/lib/curriculum/index.ts`; añade su `LevelMeta` a `LEVELS`.
-3. Un nivel sin lecciones se muestra como **"Muy pronto"** en el mapa; si define `upcoming: string[]`, lista esos temas como chips bloqueados (así está el Nivel 6, JavaScript).
-4. Para lecciones de CSS usa reglas `computedStyle` (renderizan en un iframe oculto). Añade un caso a `scripts/validate-engine.test.mts` con una solución correcta.
+3. Un nivel sin lecciones se muestra como **"Muy pronto"** en el mapa; si define `upcoming: string[]`, lista esos temas como chips bloqueados.
+4. Para lecciones de CSS usa reglas `computedStyle` (renderizan en un iframe oculto; acepta `viewport` en px para validar media queries). Para JavaScript usa `jsMatches` y `domAfterJs` (comprueba el DOM tras ejecutar el JS — texto y/o estilos computados —, con `clickSelector` opcional); el script del niño se inyecta al final del `<body>` y el sandbox bloquea `alert`/`prompt`/`confirm`. `computedStyle` y `domAfterJs` no corren en el test headless: cada lección necesita además una regla estática. Añade un caso a `scripts/validate-engine.test.mts` con una solución correcta.
 
 Para escribir contenido nuevo usa el agente `curriculum-author`; para auditar coherencia, `lesson-coherence-reviewer` (ver `.claude/agents/`).
 

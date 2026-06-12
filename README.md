@@ -33,15 +33,13 @@ npm test        # prueba headless del motor de validación (jsdom)
 ## Cómo probar el MVP
 
 1. **Landing** (`/`): página para padres/docentes con FAQ. Pulsa **Empezar gratis**.
-2. **Aventuras** (`/aventuras`): mapa con los Niveles 1–4 (40 aventuras de HTML y CSS). Las aventuras se desbloquean en orden.
-   - Nivel 1: fundamentos de HTML · Nivel 2: introducción a CSS · Nivel 3: HTML intermedio (tablas, formularios, semántica) · Nivel 4: CSS intermedio (flexbox, sombras, efectos).
+2. **Aventuras** (`/aventuras`): mapa con los Niveles 1–6 (60 aventuras de HTML, CSS y JavaScript). Las aventuras se desbloquean en orden.
+   - Nivel 1: fundamentos de HTML · Nivel 2: introducción a CSS · Nivel 3: HTML intermedio (tablas, formularios, semántica) · Nivel 4: CSS intermedio (flexbox, sombras, efectos) · Nivel 5: diseño responsive (media queries, con conmutador 🖥️/📱 en la vista previa) · Nivel 6: JavaScript básico (DOM, eventos, condicionales, bucles, funciones).
    - Cada aventura tiene 5 pasos: narrativa → demo visual → código de referencia → **tú escribes** (editor + preview en vivo + botón _Comprobar_) → celebración con insignia.
 3. **Repaso** (`/repaso`): todos los conceptos que has desbloqueado, agrupados por nivel, con su código de ejemplo y enlace para volver a la aventura.
 4. **Proyectos** (`/proyectos`): sandbox libre con plantillas; crea, edita (autoguardado) y borra páginas propias.
 5. **Perfil** (`/perfil`): nombre, avatar, insignias y **Exportar / Importar** tus datos.
 6. **Progreso** (`/progreso`): panel para adultos con el avance por nivel.
-
-> El Nivel 5 (diseño responsive) y el Nivel 6 (**JavaScript básico**) aparecen como **"Muy pronto"** en el mapa; su contenido se desarrollará más adelante.
 
 ### Probar exportar/importar entre computadoras
 
@@ -71,7 +69,7 @@ src/
 
 ### Extender el currículo
 
-El currículo está diseñado para crecer sin reescritura: añade `src/lib/curriculum/levelN.ts` exportando `Lesson[]` y agrégalo en `src/lib/curriculum/index.ts`. Las reglas de validación (`ValidationRule`) ya soportan estilos computados (`computedStyle`) para las lecciones de CSS de los niveles 2 a 5.
+El currículo está diseñado para crecer sin reescritura: añade `src/lib/curriculum/levelN.ts` exportando `Lesson[]` y agrégalo en `src/lib/curriculum/index.ts`. Las reglas de validación (`ValidationRule`) soportan estilos computados (`computedStyle`, con `viewport` opcional para validar media queries en distintos anchos) y JavaScript (`jsMatches` y `domAfterJs`, que comprueba el DOM tras ejecutar el código del niño, con clic simulado opcional).
 
 ## Para desarrolladores (Claude Code)
 
