@@ -13,8 +13,9 @@ const { validateOutput } = await import("../src/lib/validation.ts");
 const { ALL_LESSONS, getLesson } = await import("../src/lib/curriculum/index.ts");
 
 // Soluciones de ejemplo "correctas" para algunas lecciones representativas.
-// Una solución es solo HTML (string) o un par { html, css } para lecciones de CSS.
-type Solution = string | { html: string; css: string };
+// Una solución es solo HTML (string) o un objeto { html, css?, js? } para
+// lecciones de CSS o JavaScript.
+type Solution = string | { html: string; css?: string; js?: string };
 const SOLUTIONS: Record<number, Solution> = {
   // Nivel 1 — HTML
   1: "<p>¡Hola, soy programador!</p>",
@@ -71,6 +72,62 @@ const SOLUTIONS: Record<number, Solution> = {
     css: "button { background-color: #8b5cf6; color: white; padding: 12px; transition: 0.3s; } button:hover { background-color: #ec4899; }",
   },
   40: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; gap: 16px; box-shadow: 4px 4px 8px gray; }" },
+
+  // Nivel 5 — Diseño responsive. Las reglas computedStyle (incl. viewport) solo
+  // corren en el navegador; aquí se verifican las reglas estáticas (cssMatches).
+  41: { html: "<div><p>Me adapto a la pantalla</p></div>", css: "div { background-color: #c4b5fd; width: 50%; }" },
+  42: { html: '<h1>Mi paisaje favorito</h1><img src="https://picsum.photos/900/300" alt="Paisaje muy ancho">', css: "img { max-width: 100%; }" },
+  43: { html: "<div><p>Tarjeta elástica</p></div>", css: "div { background-color: #a7f3d0; width: 100%; max-width: 400px; }" },
+  44: { html: "<div><p>Cambio de color en celular</p></div>", css: "div { background-color: lightblue; padding: 20px; } @media (max-width: 600px) { div { background-color: orange; } }" },
+  45: { html: '<h1>Mi blog</h1><img src="https://picsum.photos/200" alt="Foto decorativa"><p>Bienvenidos a mi página.</p>', css: "@media (max-width: 600px) { img { display: none; } }" },
+  46: { html: "<h1>Bienvenidos a mi mundo</h1><p>Una página que se lee bien en todos lados.</p>", css: "h1 { font-size: 40px; } @media (max-width: 600px) { h1 { font-size: 24px; } }" },
+  47: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p><p>Cuatro</p></div>", css: "div { display: flex; gap: 12px; flex-wrap: wrap; } p { background-color: #fbcfe8; padding: 12px; min-width: 120px; text-align: center; }" },
+  48: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; gap: 12px; } p { background-color: #a7f3d0; padding: 14px; text-align: center; } @media (max-width: 600px) { div { flex-direction: column; } }" },
+  49: { html: "<div><p>Mi tarjeta</p></div>", css: "div { display: flex; height: 100vh; justify-content: center; align-items: center; } p { background-color: #fbcfe8; padding: 20px; border-radius: 16px; }" },
+  50: { html: "<h1>Mi galería</h1><div><p>Foto 1</p><p>Foto 2</p><p>Foto 3</p></div>", css: "p { background-color: #c4b5fd; padding: 20px; border-radius: 12px; text-align: center; } div { display: flex; gap: 16px; } @media (max-width: 600px) { div { flex-direction: column; } }" },
+
+  // Nivel 6 — JavaScript. Las reglas domAfterJs solo corren en el navegador;
+  // este test verifica las reglas estáticas (jsMatches) con soluciones reales.
+  51: {
+    html: '<h1 id="saludo">Zzz... estoy dormida</h1>',
+    js: 'document.querySelector("#saludo").textContent = "¡Estoy viva!";',
+  },
+  52: {
+    html: '<h2>Mi mascota</h2>\n<p id="mascota"></p>',
+    js: 'let mascota = "gato";\ndocument.querySelector("#mascota").textContent = "Mi mascota es un " + mascota;',
+  },
+  53: {
+    html: '<h2>La cuenta de las galletas</h2>\n<p id="resultado"></p>',
+    js: 'let galletas = 4 * 3;\ndocument.querySelector("#resultado").textContent = "Tengo " + galletas + " galletas";',
+  },
+  54: {
+    html: '<button id="boton">¡Púlsame!</button>\n<p id="mensaje">Esperando...</p>',
+    js: 'document.querySelector("#boton").addEventListener("click", () => {\n  document.querySelector("#mensaje").textContent = "¡Hiciste clic!";\n});',
+  },
+  55: {
+    html: '<h1 id="titulo">Mi página</h1>\n<button id="boton">Modo fiesta</button>',
+    js: 'document.querySelector("#boton").addEventListener("click", () => {\n  document.querySelector("#titulo").style.color = "hotpink";\n  document.body.style.backgroundColor = "lightyellow";\n});',
+  },
+  56: {
+    html: '<h2>El juego de puntos</h2>\n<p id="animo">???</p>',
+    js: 'let puntos = 10;\nif (puntos >= 5) {\n  document.querySelector("#animo").textContent = "¡Ganaste!";\n} else {\n  document.querySelector("#animo").textContent = "Sigue intentando";\n}',
+  },
+  57: {
+    html: '<h2>La escuela de magia</h2>\n<p id="hechizo">Esperando magia...</p>',
+    js: 'function brillar() {\n  document.querySelector("#hechizo").textContent = "✨ ¡Magia! ✨";\n}\nbrillar();',
+  },
+  58: {
+    html: '<h2>El aplausómetro</h2>\n<p id="aplausos">...</p>',
+    js: 'let texto = "";\nfor (let i = 0; i < 5; i++) {\n  texto = texto + "👏";\n}\ndocument.querySelector("#aplausos").textContent = texto;',
+  },
+  59: {
+    html: '<h2>Mi mochila</h2>\n<ul id="lista">\n  <li>Agua</li>\n</ul>',
+    js: 'let nuevo = document.createElement("li");\nnuevo.textContent = "Linterna";\ndocument.querySelector("#lista").appendChild(nuevo);',
+  },
+  60: {
+    html: '<h1 id="titulo">La puerta secreta</h1>\n<button id="boton">Usar la llave 🔑</button>\n<p id="mensaje">La puerta está cerrada.</p>',
+    js: 'let llaves = 3;\ndocument.querySelector("#boton").addEventListener("click", () => {\n  if (llaves >= 1) {\n    document.querySelector("#mensaje").textContent = "¡La puerta se abrió!";\n    document.querySelector("#titulo").style.color = "green";\n  } else {\n    document.querySelector("#mensaje").textContent = "No tienes llaves...";\n  }\n});',
+  },
 };
 
 let pass = 0;
@@ -96,10 +153,11 @@ for (const lesson of ALL_LESSONS) {
   }
 
   const solHtml = typeof solution === "string" ? solution : solution.html;
-  const solCss = typeof solution === "string" ? "" : solution.css;
+  const solCss = typeof solution === "string" ? "" : (solution.css ?? "");
+  const solJs = typeof solution === "string" ? "" : (solution.js ?? "");
 
   // 1) La solución correcta debe pasar.
-  const good = await validateOutput(solHtml, solCss, lesson.challenge.rules);
+  const good = await validateOutput(solHtml, solCss, lesson.challenge.rules, solJs);
   report(
     `Aventura ${lesson.id} (${lesson.title}) — solución correcta pasa`,
     good.passed,
