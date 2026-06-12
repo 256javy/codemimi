@@ -25,6 +25,26 @@ function safeRegex(pattern: string, flags?: string): RegExp | null {
   }
 }
 
+/** Recolecta errores (bloquean) y avisos (no bloquean) de la validación. */
+interface RuleOutcome {
+  errors: string[];
+  warnings: string[];
+}
+
+/** Normaliza un texto quitando tildes/acentos y pasando a minúsculas, para
+ *  comparar de forma tolerante a errores ortográficos de diacríticos. */
+function looseNormalize(text: string): string {
+  return text
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+/** Aviso amistoso cuando el texto coincide salvo por tildes/acentos. */
+function spellingWarning(actual: string, expected: string): string {
+  return `¡Muy bien! Escribiste «${actual}» y pedíamos «${expected}». Hay una pequeña diferencia (una tilde o acento), pero tu código está correcto. 😊`;
+}
+
 /** Evalúa las reglas que NO requieren render (estructura HTML, regex). */
 function evaluateStaticRules(
   rules: ValidationRule[],
@@ -32,8 +52,9 @@ function evaluateStaticRules(
   css: string,
   js: string,
   doc: Document,
-): string[] {
+): RuleOutcome {
   const errors: string[] = [];
+  const warnings: string[] = [];
 
   for (const rule of rules) {
     switch (rule.type) {
@@ -55,8 +76,15 @@ function evaluateStaticRules(
         if (!el) {
           errors.push(rule.message);
         } else if (rule.text) {
-          if (!text.toLowerCase().includes(rule.text.toLowerCase()))
+          const expected = rule.text;
+          if (text.toLowerCase().includes(expected.toLowerCase())) {
+            // Coincidencia exacta: todo bien.
+          } else if (looseNormalize(text).includes(looseNormalize(expected))) {
+            // Solo difiere en tildes/acentos: lo aceptamos con un aviso.
+            warnings.push(spellingWarning(text, expected));
+          } else {
             errors.push(rule.message);
+          }
         } else if (text.length === 0) {
           errors.push(rule.message);
         }
@@ -96,7 +124,7 @@ function evaluateStaticRules(
     }
   }
 
-  return errors;
+  return { errors, warnings };
 }
 
 type RenderedRule = Extract<
@@ -113,13 +141,13 @@ async function evaluateRenderedRules(
   html: string,
   css: string,
   js: string,
-): Promise<string[]> {
+): Promise<RuleOutcome> {
   const rendered = rules.filter(
     (r): r is RenderedRule =>
       r.type === "computedStyle" || r.type === "domAfterJs",
   );
-  if (rendered.length === 0) return [];
-  if (typeof document === "undefined") return [];
+  if (rendered.length === 0) return { errors: [], warnings: [] };
+  if (typeof document === "undefined") return { errors: [], warnings: [] };
 
   // Las media queries dependen del ancho del iframe: agrupamos las reglas por
   // viewport para renderizar una sola vez por ancho distinto.
@@ -135,10 +163,13 @@ async function evaluateRenderedRules(
   }
 
   const errors: string[] = [];
+  const warnings: string[] = [];
   for (const [width, group] of groups) {
-    errors.push(...(await evaluateInIframe(group, html, css, js, width)));
+    const outcome = await evaluateInIframe(group, html, css, js, width);
+    errors.push(...outcome.errors);
+    warnings.push(...outcome.warnings);
   }
-  return errors;
+  return { errors, warnings };
 }
 
 async function evaluateInIframe(
@@ -147,7 +178,7 @@ async function evaluateInIframe(
   css: string,
   js: string,
   width: number,
-): Promise<string[]> {
+): Promise<RuleOutcome> {
   const iframe = document.createElement("iframe");
   iframe.setAttribute(
     "sandbox",
@@ -158,7 +189,7 @@ async function evaluateInIframe(
 
   try {
     const idoc = iframe.contentDocument;
-    if (!idoc) return group.map((r) => r.message);
+    if (!idoc) return { errors: group.map((r) => r.message), warnings: [] };
     idoc.open();
     idoc.write(buildDocument(html, css, js));
     idoc.close();
@@ -168,6 +199,7 @@ async function evaluateInIframe(
 
     const win = iframe.contentWindow;
     const errors: string[] = [];
+    const warnings: string[] = [];
     for (const rule of group) {
       if (rule.type === "computedStyle") {
         const el = idoc.querySelector(rule.selector);
@@ -195,8 +227,14 @@ async function evaluateInIframe(
           continue;
         }
         if (rule.textContains) {
-          const text = (el.textContent ?? "").toLowerCase();
-          if (!text.includes(rule.textContains.toLowerCase())) {
+          const raw = (el.textContent ?? "").trim();
+          const expected = rule.textContains;
+          if (raw.toLowerCase().includes(expected.toLowerCase())) {
+            // Coincidencia exacta: todo bien.
+          } else if (looseNormalize(raw).includes(looseNormalize(expected))) {
+            // Solo difiere en tildes/acentos: lo aceptamos con un aviso.
+            warnings.push(spellingWarning(raw, expected));
+          } else {
             errors.push(rule.message);
             continue;
           }
@@ -216,7 +254,7 @@ async function evaluateInIframe(
         }
       }
     }
-    return errors;
+    return { errors, warnings };
   } finally {
     iframe.remove();
   }
@@ -232,9 +270,10 @@ export async function validateOutput(
   const parser = new DOMParser();
   const doc = parser.parseFromString(buildDocument(html, css), "text/html");
 
-  const staticErrors = evaluateStaticRules(rules, html, css, js, doc);
-  const renderedErrors = await evaluateRenderedRules(rules, html, css, js);
+  const staticOutcome = evaluateStaticRules(rules, html, css, js, doc);
+  const renderedOutcome = await evaluateRenderedRules(rules, html, css, js);
 
-  const errors = [...staticErrors, ...renderedErrors];
-  return { passed: errors.length === 0, errors };
+  const errors = [...staticOutcome.errors, ...renderedOutcome.errors];
+  const warnings = [...staticOutcome.warnings, ...renderedOutcome.warnings];
+  return { passed: errors.length === 0, errors, warnings };
 }

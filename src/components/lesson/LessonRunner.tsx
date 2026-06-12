@@ -28,6 +28,7 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
   const [css, setCss] = useState(lesson.challenge.startingCss ?? "");
   const [js, setJs] = useState(lesson.challenge.startingJs ?? "");
   const [errors, setErrors] = useState<string[]>([]);
+  const [warnings, setWarnings] = useState<string[]>([]);
   const [checking, setChecking] = useState(false);
   const [hintsShown, setHintsShown] = useState(0);
 
@@ -44,6 +45,7 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
     try {
       const result = await validateOutput(html, css, lesson.challenge.rules, js);
       setErrors(result.errors);
+      setWarnings(result.warnings);
       if (result.passed) {
         completeLesson(lesson.id, lesson.badge);
         setPhase("celebration");
@@ -154,6 +156,17 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
                   </div>
                 )}
 
+                {warnings.length > 0 && (
+                  <div className="space-y-1 rounded-2xl border-2 border-menta/40 bg-menta/10 p-4">
+                    <p className="font-bold text-menta">¡Ojo a este detalle! 👀</p>
+                    <ul className="list-inside list-disc text-sm text-tinta/80">
+                      {warnings.map((w, i) => (
+                        <li key={i}>{w}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
                 {hintsShown > 0 && (
                   <div className="space-y-1 rounded-2xl border-2 border-sol/40 bg-sol/10 p-4 text-sm text-tinta/80">
                     {lesson.challenge.hints.slice(0, hintsShown).map((h, i) => (
@@ -186,6 +199,15 @@ export default function LessonRunner({ lesson }: { lesson: Lesson }) {
         <div className="animate-pop-in space-y-6 text-center">
           <div className="text-7xl">🎉</div>
           <Character id={lesson.character} size="md" speech={lesson.celebration} />
+          {warnings.length > 0 && (
+            <div className="mx-auto max-w-md space-y-1 rounded-2xl border-2 border-menta/40 bg-menta/10 p-4 text-left">
+              {warnings.map((w, i) => (
+                <p key={i} className="text-sm text-tinta/80">
+                  {w}
+                </p>
+              ))}
+            </div>
+          )}
           {lesson.badge && (
             <div className="mx-auto inline-flex flex-col items-center gap-2 rounded-2xl border-2 border-sol/40 bg-sol/10 px-8 py-5">
               <span className="text-5xl">{BADGES[lesson.badge].emoji}</span>

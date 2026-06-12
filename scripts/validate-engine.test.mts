@@ -173,6 +173,39 @@ for (const lesson of ALL_LESSONS) {
   );
 }
 
+// Tolerancia ortográfica: un texto correcto salvo por una tilde pasa igual,
+// pero genera un aviso (warning) en vez de un error.
+{
+  const lesson3 = getLesson(3)!;
+  // "Capitulo" sin tilde en lugar de "Capítulo".
+  const loose = await validateOutput(
+    "<h1>Mi Aventura</h1><h2>Capitulo 1</h2>",
+    "",
+    lesson3.challenge.rules,
+  );
+  report(
+    "Tolerancia ortográfica — «Capitulo» (sin tilde) pasa igual",
+    loose.passed,
+    loose.passed ? "" : `→ errores: ${JSON.stringify(loose.errors)}`,
+  );
+  report(
+    "Tolerancia ortográfica — genera un aviso amistoso",
+    loose.warnings.length === 1,
+    `→ warnings: ${JSON.stringify(loose.warnings)}`,
+  );
+  // Un texto realmente equivocado SÍ debe marcar error.
+  const wrong = await validateOutput(
+    "<h1>Mi Aventura</h1><h2>Otra cosa</h2>",
+    "",
+    lesson3.challenge.rules,
+  );
+  report(
+    "Texto equivocado (no solo tildes) NO pasa",
+    !wrong.passed && wrong.warnings.length === 0,
+    "→ un texto distinto debería marcar error, no aviso",
+  );
+}
+
 // Verificación puntual de getLesson.
 report("getLesson(1) devuelve la aventura 1", getLesson(1)?.id === 1);
 report("getLesson(999) devuelve undefined", getLesson(999) === undefined);

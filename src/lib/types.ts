@@ -91,6 +91,9 @@ export interface ValidationResult {
   passed: boolean;
   /** Mensajes de las reglas que aún no se cumplen, en español amigable. */
   errors: string[];
+  /** Avisos amigables que NO bloquean el avance: el código es correcto pero
+   *  hubo una diferencia menor (p. ej. una tilde o acento) respecto a lo pedido. */
+  warnings: string[];
 }
 
 /** Un paso de tipo narrativo dicho por el personaje. */
