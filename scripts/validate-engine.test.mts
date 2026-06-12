@@ -13,7 +13,10 @@ const { validateOutput } = await import("../src/lib/validation.ts");
 const { ALL_LESSONS, getLesson } = await import("../src/lib/curriculum/index.ts");
 
 // Soluciones de ejemplo "correctas" para algunas lecciones representativas.
-const SOLUTIONS: Record<number, string> = {
+// Una solución es solo HTML (string) o un par { html, css } para lecciones de CSS.
+type Solution = string | { html: string; css: string };
+const SOLUTIONS: Record<number, Solution> = {
+  // Nivel 1 — HTML
   1: "<p>¡Hola, soy programador!</p>",
   2: "<!DOCTYPE html><html><head></head><body><p>¡Mi primera página!</p></body></html>",
   3: "<h1>Mi Aventura</h1><h2>Capítulo 1</h2>",
@@ -24,6 +27,23 @@ const SOLUTIONS: Record<number, string> = {
   8: '<a href="https://wikipedia.org">ir a wikipedia</a>',
   9: "<div><h2>Mi caja</h2><p>contenido</p></div>",
   10: '<h1>Yo</h1><p>hola</p><ul><li>a</li><li>b</li></ul><img src="x.jpg" alt="foto">',
+
+  // Nivel 2 — CSS. Las reglas computedStyle solo corren en el navegador (aquí se
+  // omiten por falta de `document` global); este test verifica las reglas estáticas
+  // (cssMatches) con una solución que SÍ escribe el CSS pedido.
+  11: { html: "<p>Me encanta programar</p>", css: "p { color: red; }" },
+  12: { html: "<div><h2>Mi tarjeta</h2></div>", css: "div { background-color: yellow; }" },
+  13: { html: "<p>¡Soy gigante!</p>", css: "p { font-size: 40px; }" },
+  14: { html: "<h1>Mi título</h1>", css: "h1 { text-align: center; }" },
+  15: { html: "<p>Letras divertidas</p>", css: "p { font-family: monospace; }" },
+  16: { html: "<p>Subraya esto</p>", css: "p { text-decoration: underline; }" },
+  17: { html: "<div><p>Caja con borde</p></div>", css: "div { border: 4px solid black; }" },
+  18: { html: "<div><p>Caja redondita</p></div>", css: "div { border-radius: 20px; }" },
+  19: { html: "<div><p>Tengo aire</p></div>", css: "div { padding: 20px; }" },
+  20: {
+    html: "<div><h2>Mi tarjeta</h2><p>¡Hecha con CSS!</p></div>",
+    css: "div { background-color: pink; padding: 20px; border-radius: 16px; text-align: center; }",
+  },
 };
 
 let pass = 0;
@@ -48,8 +68,11 @@ for (const lesson of ALL_LESSONS) {
     continue;
   }
 
+  const solHtml = typeof solution === "string" ? solution : solution.html;
+  const solCss = typeof solution === "string" ? "" : solution.css;
+
   // 1) La solución correcta debe pasar.
-  const good = await validateOutput(solution, "", lesson.challenge.rules);
+  const good = await validateOutput(solHtml, solCss, lesson.challenge.rules);
   report(
     `Aventura ${lesson.id} (${lesson.title}) — solución correcta pasa`,
     good.passed,
