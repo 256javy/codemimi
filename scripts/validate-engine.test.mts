@@ -56,6 +56,21 @@ const SOLUTIONS: Record<number, Solution> = {
   28: "<main><section><article>Mi artículo</article></section></main>",
   29: '<figure><img src="x.jpg" alt="foto"><figcaption>Mi foto</figcaption></figure>',
   30: '<header><h1>Mi página</h1></header><main><table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table></main><form><input type="text"><button>Enviar</button></form>',
+
+  // Nivel 4 — CSS intermedio (flexbox, espaciado, sombras, efectos). Validación dual.
+  31: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; }" },
+  32: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; justify-content: space-between; }" },
+  33: { html: "<div><p>Uno</p><p>Dos</p></div>", css: "div { display: flex; height: 120px; align-items: center; }" },
+  34: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; gap: 16px; }" },
+  35: { html: "<div><p>Tengo espacio fuera</p></div>", css: "div { background-color: #c4b5fd; margin: 30px; }" },
+  36: { html: "<div><p>Caja con sombra</p></div>", css: "div { background-color: #fbcfe8; padding: 20px; box-shadow: 4px 4px 8px gray; }" },
+  37: { html: "<div><p>Casi transparente</p></div>", css: "div { background-color: #6366f1; padding: 20px; opacity: 0.5; }" },
+  38: { html: "<div><p>¡Girando!</p></div>", css: "div { background-color: #f59e0b; padding: 20px; transform: rotate(10deg); }" },
+  39: {
+    html: "<button>Pásame el cursor</button>",
+    css: "button { background-color: #8b5cf6; color: white; padding: 12px; transition: 0.3s; } button:hover { background-color: #ec4899; }",
+  },
+  40: { html: "<div><p>Uno</p><p>Dos</p><p>Tres</p></div>", css: "div { display: flex; gap: 16px; box-shadow: 4px 4px 8px gray; }" },
 };
 
 let pass = 0;
