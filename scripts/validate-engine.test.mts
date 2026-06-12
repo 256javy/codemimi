@@ -44,6 +44,18 @@ const SOLUTIONS: Record<number, Solution> = {
     html: "<div><h2>Mi tarjeta</h2><p>¡Hecha con CSS!</p></div>",
     css: "div { background-color: pink; padding: 20px; border-radius: 16px; text-align: center; }",
   },
+
+  // Nivel 3 — HTML intermedio (tablas, formularios, semántica). Validación estructural.
+  21: "<table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table>",
+  22: "<table><tr><th>Fruta</th><th>Color</th></tr><tr><td>Manzana</td><td>Roja</td></tr></table>",
+  23: '<form><input type="text"></form>',
+  24: '<form><label>Nombre:</label><input type="text"></form>',
+  25: '<form><input type="text"><button>Enviar</button></form>',
+  26: "<form><textarea></textarea><select><option>Sí</option><option>No</option></select></form>",
+  27: "<header>Mi sitio</header><nav>Inicio</nav><footer>Fin</footer>",
+  28: "<main><section><article>Mi artículo</article></section></main>",
+  29: '<figure><img src="x.jpg" alt="foto"><figcaption>Mi foto</figcaption></figure>',
+  30: '<header><h1>Mi página</h1></header><main><table><tr><td>a</td><td>b</td></tr><tr><td>c</td><td>d</td></tr></table></main><form><input type="text"><button>Enviar</button></form>',
 };
 
 let pass = 0;

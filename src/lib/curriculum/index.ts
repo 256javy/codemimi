@@ -4,6 +4,7 @@
 import type { Lesson, LessonLevel } from "../types";
 import { LEVEL_1 } from "./level1";
 import { LEVEL_2 } from "./level2";
+import { LEVEL_3 } from "./level3";
 
 export interface LevelMeta {
   level: LessonLevel;
@@ -70,7 +71,7 @@ export const LEVELS: LevelMeta[] = [
 ];
 
 /** Todas las aventuras disponibles, ordenadas por id. */
-export const ALL_LESSONS: Lesson[] = [...LEVEL_1, ...LEVEL_2].sort((a, b) => a.id - b.id);
+export const ALL_LESSONS: Lesson[] = [...LEVEL_1, ...LEVEL_2, ...LEVEL_3].sort((a, b) => a.id - b.id);
 
 export function getLesson(id: number): Lesson | undefined {
   return ALL_LESSONS.find((l) => l.id === id);
